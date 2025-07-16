@@ -24,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title>Fusing LLM Capabilities with Routing Data</title>
+  <title>Graph World Model</title>
 
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
@@ -61,34 +61,23 @@
             <div class="is-size-5 publication-authors">
   <!-- Paper authors -->
 <div class="is-size-6 publication-authors">
-  <span class="author-block"><b>Tao Feng<sup>1*</sup></b>,</span>
-  <span class="author-block"><b>Haozhen Zhang<sup>1*</sup></b>,</span>
-  <span class="author-block"><b>Zijie Lei<sup>1</sup></b>,</span>
-  <span class="author-block"><b>Pengrui Han<sup>1</sup></b>,</span>
-  <span class="author-block"><b>Mostofa Patwary<sup>2</sup></b>,</span>
-  <span class="author-block"><b>Mohammad Shoeybi<sup>2</sup></b>,</span>
-  <span class="author-block"><b>Bryan Catanzaro<sup>2</sup></b>,</span>
-  <span class="author-block"><b>Jiaxuan You<sup>1,2</sup></b></span>
+ <span class="author-block"><b>Tao Feng</b>,</span>
+ <span class="author-block"><b>Yexin Wu</b>,</span>
+ <span class="author-block"><b>Guanyu Lin</b>,</span>
+ <span class="author-block"><b>Jiaxuan You</b></span>
 </div>
-
 <div class="is-size-6 publication-authors" style="margin-top: 0.5em;">
-  <span class="author-block"><sup>1</sup>University of Illinois Urbana-Champaign</span><br/>
-  <span class="author-block"><sup>2</sup>NVIDIA</span>
+ <span class="author-block">University of Illinois Urbana-Champaign</span><br/>
 </div>
 
 <div class="is-size-6 publication-authors" style="margin-top: 0.5em;">
   <span class="author-block">{taofeng2, jiaxuan}@illinois.edu</span>
 </div>
 
-<!-- Footnotes -->
-<div class="is-size-7 publication-authors" style="margin-top: 1em;">
-  <span class="author-block"><sup>*</sup>Equal contribution</span><br/>
-</div>
-
 
                   <!-- ArXiv abstract Link -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/pdf/2410.03834" target="_blank"
+                  <a href="https://arxiv.org/pdf/2507.10539" target="_blank"
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="ai ai-arxiv"></i>
@@ -99,7 +88,7 @@
 
                   <!-- Github link -->
                   <span class="link-block">
-                    <a href="https://github.com/ulab-uiuc/FusionFactory" target="_blank"
+                    <a href="https://github.com/ulab-uiuc/GWM" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
@@ -107,24 +96,7 @@
                     <span>Code</span>
                   </a>
                 </span>
-       <!-- Hugging Face links for Dataset and Model -->
-<span class="link-block">
-  <a href="https://huggingface.co/datasets/ulab-ai/FusionBench" target="_blank"
-     class="external-link button is-normal is-rounded is-dark">
-    <span class="icon">📂</span>
-    <span>Dataset</span>
-  </a>
-</span>
-
-<span class="link-block" style="margin-left: 10px;">
-  <a href="https://huggingface.co/ulab-ai/FusionFactory" target="_blank"
-     class="external-link button is-normal is-rounded is-dark">
-    <span class="icon">🤖</span>
-    <span>Model</span>
-  </a>
-</span>
-
-
+   
 
         
             </div>
@@ -156,35 +128,10 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            The rapid advancement of large language models (LLMs) has fostered a vibrant
-ecosystem of diverse architectures, each exhibiting unique strengths across different
-tasks due to variations in model design, training data, and optimization objectives.
-Despite this diversity, most LLM applications rely on a single backend model,
-limiting their ability to cover a wide range of capabilities and often resulting in
-inefficiencies in both performance and token costs when tackling complex tasks.
-We point out that modern LLM hosting platforms typically serve a variety of
-models in response to diverse queries, generating a rich and underutilized resource:
-LLM routing data, which offers insights into the comparative strengths of differ-
-ent models across tasks. We identify a critical gap in current LLM ecosystems,
-the underexploitation of large-scale LLM routing data, which holds significant
-potential for optimizing multi-LLM integration and effectively harnessing their
-complementary capabilities. To tackle this question, we propose FusionBench,
-a comprehensive routing benchmark that includes diverse response types from
-multiple LLMs, summarizes reusable thought templates from top models, and
-covers 14 tasks across five domains using 20 open-source LLMs ranging from
-8B to 671B parameters, consisting of 103M tokens. Based on FusionBench, we
-propose FusionFactory, a systematic LLM fusion framework with three repre-
-sentative levels: (1) query-level fusion, which constructs tailored LLM routers
-for each query while considering both direct response patterns and reasoning-
-augmented outputs; (2) thought-level fusion, which enhances response quality
-by leveraging abstract thought templates derived from top-performing LLMs’
-answers to similar past queries; and (3) model-level fusion, which transfers ca-
-pabilities between models through distillation methods, selecting top-performing
-responses or those with highest judge scores as training data. We systemati-
-cally evaluate FusionFactory on FusionBench and find that fusing LLMs with
-FusionFactory yields consistent benchmark performance improvement over the
-best individual LLM across 14 popular LLM benchmarks, where the optimal
-FusionFactory configuration varies across different benchmarks.
+            World models (WMs) demonstrate strong capabilities in prediction, generation, and planning tasks. 
+            Existing WMs primarily focus on unstructured data while cannot leverage the ubiquitous structured data, often represented as graphs, in the digital world. While multiple graph foundation models have been proposed, they focus on graph learning tasks and cannot extend to diverse multi-modal data and interdisciplinary tasks. 
+            To address these challenges, we propose the Graph World Model (GWM), a world model that supports both unstructured and graph-structured states with multi-modal information and represents diverse tasks as actions. The core of a GWM is a generic message-passing algorithm to aggregate structured information, either over a unified multi-modal token space by converting multi-modal data into text (GWM-T) or a unified multi-modal embedding space by modality-specific encoders (GWM-E). 
+            Notably, GWM introduces action nodes to support diverse tasks, where action nodes are linked to other nodes via direct reference or similarity computation. Extensive experiments on 6 tasks from diverse domains, including multi-modal generation and matching, recommendation, graph prediction, multi-agent, retrieval-augmented generation, and planning and optimization, show that the same GWM outperforms or matches domain-specific baselines' performance, benefits from multi-hop structures, and demonstrates strong zero-shot/few-shot capabilities on unseen new tasks.
           </p>
         </div>
 
@@ -209,50 +156,23 @@ FusionFactory configuration varies across different benchmarks.
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">1. FusionBench: Routing Benchmark for LLM Capabilities Fusion</h2>
+        <h2 class="title is-3">1. Multi-modal world state transition can be modeled via graphs.</h2>
         <div class="content">
 
           <div class="content has-text-justified">
           
-            <p> Overview of FusionBench’s construction process. </p>
+            <p> We model the current state as a graph with multi-modal nodes containing image, table, and text data. Actions are represented as action nodes that query the state, categorized into intended actions (node, edge, graph levels) and unintended actions (using similarity computation). The transition function updates states at three levels: nodes, edges, and graphs. </p>
             
           </div>
 
           <div class=" has-text-centered">
-            <img src="static/images/j1.png" alt="MY ALT TEXT"/>
+            <img src="static/images/1.png" alt="MY ALT TEXT"/>
           </div>
           <b class="subtitle is-size-6">
           </b>
         </div>
 
-        <h2 class="title is-4"></h2>
-        <div class="content has-text-justified">
-          <p>
-            
-          </p>
-        </div>
-        
-        <div class="content has-text-justified">
-          
-          <p>It shows how user queries are sent to different LLMs using two prompting strategies—direct answering and reasoning-based answering. The generated responses are then evaluated using multiple metrics, including performance, cost, and LLM judge scores. A sample table on the right demonstrates the collected results.</p>
-       
-        </div>
-
-         <div class="content has-text-justified">
-          
-            <p> Data Summary of Tasks and Interacting LLMs in FusionBench. </p>
-            
-          </div>
-
-        <div class=" has-text-centered">
-            <img src="static/images/j2.png" alt="MY ALT TEXT"/>
-          </div>
-          <b class="subtitle is-size-6">
-          </b>
-        </div>
-
-        
-        
+      
       </div>
     </div>
   </div>
@@ -262,20 +182,40 @@ FusionFactory configuration varies across different benchmarks.
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">2. FusionFactory: LLM Capabilities Fusion from Different Levels.</h2>
+        <h2 class="title is-3">2. Instantiations of GWM.</h2>
         <div class="content">
           <div class=" has-text-centered">
-            <img src="static/images/j3.png" alt="MY ALT TEXT"/>
+            <img src="static/images/2.png" alt="MY ALT TEXT"/>
           </div>
 <p>
-  <strong>At the query level</strong>, a router selects the most suitable LLM for each task-query pair by considering performance, cost, and LLM judge scores.
+  Representative instantiations that can be unified into a GWM from three aspects: world prediction, world generation, and world optimization. Specifically, GWM covers six scenarios: multi-modal generation and matching, recommendation systems, graph prediction, multi-agent collaboration, retrieval-augmented generation, and planning and optimization. It represents different entities and their interactions as graph nodes and edges, enabling unified modeling across these tasks.
+
 </p>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">3. Overall framework.</h2>
+        <div class="content">
+          <div class=" has-text-centered">
+            <img src="static/images/3.png" alt="MY ALT TEXT"/>
+          </div>
 <p>
-  <strong>At the thought level</strong>, a summarizer generates reusable reasoning templates from the top-ranked responses. These templates are then used for few-shot prompting of new queries through similarity-based retrieval.
+  The core of a GWM is a message-passing algorithm that aggregates structured info, either in a unified token space (GWM-T) or embedding space (GWM-E) via modality-specific encoders.
+
+
 </p>
-<p>
-  <strong>At the model level</strong>, a new LLM is fine-tuned using top-quality responses selected by performance or LLM judgment to enhance its overall capabilities. The table on the left provides example data points and evaluation results across different strategies.
-</p>
+
 
 
         </div>
@@ -290,77 +230,50 @@ FusionFactory configuration varies across different benchmarks.
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">4. Experiments</h2>
-        <h2 class="title is-4">4.1 Results Analysis on Query-level Fusion</h2>
+        <h2 class="title is-4">4.1 A single GWM matches the performance of
+domain-specific methods across multiple tasks</h2>
         <div class="content has-text-justified">
           <p>
-            Comparison of the LLM fusion abilities of all routers on four settings. Bold and
-underline denote the best and second-best results. We can observe
-the following: 1) GraphRouter consistently achieves the best results across all settings.  2) Graph Router can effectively fuse smaller LLMs to surpass both the best-performing LLM and
-the largest LLM. 3)  Compared to the Best LLM, the other router methods offer no significant
-advantage, which illustrates the challenge that multi-task and multi-LLM fusion pose to the router’s
-fusing capability.
+            We have the following observations: (1) Strong generalization: A single GWM achieves SOTA results in multi-modal generation, multi-agent collaboration, RAG, and planning/optimization, while performing comparably to domain-specific baselines in other tasks.
+(2) Efficient long-context processing: GWM with 2k context length outperforms LLM models with 128k context in RAG tasks, demonstrating superior long-text understanding and reasoning capabilities.
+(3) Embedding efficiency: GWM-E outperforms GWM-T in 5 out of 7 tasks while using approximately 5-10 times fewer tokens, proving the effectiveness of embedding-based message passing.
 
           </p>
         </div>
         <div class="content">
           <div class=" has-text-centered">
-            <img src="static/images/j4.png"  alt="MY ALT TEXT"/>
+            <img src="static/images/4.png"  alt="MY ALT TEXT"/>
           </div>
   
         </div>
       
 
-        <h2 class="title is-4">4.2 Result Analysis on Thought-level Fusion</h2>
+        <h2 class="title is-4">4.2 GWM benefits from multi-hop graphs</h2>
         <div class="content has-text-justified">
           <p>
-            We can observe that our thought-level fusion approach consistently improves model performance across all scales. We have
-            the following observations: 1) Thought fusion excels on tasks requiring complex reasoning.  2) Large models can also benefit from thought fusion. 3)  Hybrid selection strategy provides optimal balance.
+             Multi-hop graphs consistently improve GWM-E performance across all tasks with at least 20% relative gain on graph-related tasks. However, increasing hop numbers doesn't always yield better results due to over-smoothing and redundant information introduction.
           </p>
         </div>
         
         <div class="content">
           <div class=" has-text-centered">
-            <img src="static/images/j5.png"  alt="MY ALT TEXT"/>
+            <img src="static/images/5.png"  alt="MY ALT TEXT"/>
           </div>
   
         </div>
 
-<h2 class="title is-4">4.3 Result Analysis on Model-level Fusion</h2>
+<h2 class="title is-4">4.3 GWM boosts zero-shot/few-shot performance</h2>
 <div class="content has-text-justified">
   <p>
-    Performance of model-level fusion using LLaMA-3.1 (8B) on FusionBench, under
-different fine-tuning strategies and response selection criteria. We have
-            the following observations: 1) Model-level fusion brings modest average improvements across tasks, with gains in 4 out of 6 domains.  2) Fusion gains are not uniform, with performance drops observed in code tasks due to domain mismatch and data scarcity. 3)  LLM Judge–based selection yields the best results by offering nuanced and continuous quality assessment over rigid rule-based metrics.
+    The experiments demonstrate that GWM exhibits strong zero-shot and few-shot capabilities. GWM can effectively adapt to new tasks with minimal domain-specific training data, and its zero-shot performance on RAG tasks even surpasses single-task training results, indicating excellent generalization ability that particularly benefits tasks with limited training data.
   </p>
 </div>
 
 <div class="content">
   <div class="has-text-centered">
-    <img src="static/images/j6.png" alt="Ablation Study Results"/>
+    <img src="static/images/6.png" alt="Ablation Study Results"/>
   </div>
 </div>
-
-        <h2 class="title is-4">4.4 Comparisons Across Three Fusion Levels</h2>
-<div class="content has-text-justified">
-  <p>
-    Comparison of the three levels across six complete domains on full test set. We can observe that: 1) The thought-level approaches achieve the best fusion performances.  
-    2) The model-level approaches yield the lowest performance among the three fusion levels.
-    3) The query-level fusion demonstrates moderate performance but is the most cost-efficient
-method. 
-    4) Across different domains, we observe that compared to the zero-shot setting, fusing LLM
-capabilities is most challenging in the World Knowledge and Math domains.
-  </p>
-</div>
-
-<div class="content">
-  <div class="has-text-centered">
-    <img src="static/images/j7.png" alt="Ablation Study Results"/>
-  </div>
-</div>
-
-
-
-        
 
       </div>
     </div>
@@ -500,11 +413,10 @@ capabilities is most challenging in the World Knowledge and Math domains.
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{FusionFactory,
-  title={Fusing LLM Capabilities with Routing Data},
-  author={Tao Feng and Haozhen Zhang and Zijie Lei and Pengrui Han and Mostofa Patwary and Mohammad Shoeybi and Bryan Catanzaro and Jiaxuan You},
-  journal={arXiv preprint arXiv:xxxx.xxxxx},
-  year={2025}
+    <pre><code>@inproceedings{fenggraph,
+  title={Graph World Model},
+  author={Feng, Tao and Wu, Yexin and Lin, Guanyu and You, Jiaxuan},
+  booktitle={Forty-second International Conference on Machine Learning}
 }</code></pre>
   </div>
 </section>
