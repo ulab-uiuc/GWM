@@ -1,4 +1,4 @@
-# Graph World Model
+# Graph World Model (GWM), ICML 2025
 
 <p align="center">
     <a href="https://ulab-uiuc.github.io/GraphRouter/">
